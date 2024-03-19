@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.alloMecano.crud.repository.MecanicienRepository;
+import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -19,16 +21,12 @@ public class MecanContoller{
     @Autowired
     private MecanoService mecanoService;
     @Autowired
-    private MecanoService mecanoServicee;
-    @Autowired
     public MecanContoller(MecanicienRepository mecanicienRepository){
         this.mecanicienRepository=mecanicienRepository;
     }
 
-   @Autowired
-   private MecanoService aymens;
-@PostMapping(value="/Creermecaniciens")
-    public ResponseEntity<Mecanicien> creerMecanicien(@RequestBody Mecanicien mecanicien){
+@PostMapping(value="/ajouterMecanicien")
+    public ResponseEntity<Mecanicien> ajouterMecanicien(@RequestBody Mecanicien mecanicien){
 
     try{
         Mecanicien nouveauMecanicien= mecanicienRepository.save(mecanicien);
@@ -55,4 +53,19 @@ public class MecanContoller{
         List<Mecanicien> mecanicienListtt = mecanoService.findAll();
         return mecanicienListtt;
     }
+    @GetMapping("/getMecanicienParId/{id}")
+    public ResponseEntity <Optional<Mecanicien>> getMecanicienParId( @PathVariable Long id){
+
+        try{
+            Optional<Mecanicien> mecanicien=mecanicienRepository.findById(id);
+            if(mecanicien.isEmpty()){
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(mecanicien,HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }

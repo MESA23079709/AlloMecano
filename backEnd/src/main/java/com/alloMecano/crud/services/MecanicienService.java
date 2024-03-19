@@ -24,7 +24,6 @@ private static final Logger logger = LoggerFactory.getLogger(MecanoService.class
 //  );
 //
    public List<Mecanicien> findAll() {
-       logger.info("Début de la méthode findAll() dans MecanoService");
        return aymenS;
 
    }
