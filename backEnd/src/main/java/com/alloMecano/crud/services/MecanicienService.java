@@ -1,11 +1,11 @@
 package com.alloMecano.crud.services;
 
-import com.alloMecano.crud.controller.Mecanicien;
-import com.alloMecano.crud.repository.MecanicienRepository;
+import backEnd.src.main.java.com.alloMecano.crud.controller.Mecanicien;
+import backEnd.src.main.java.com.alloMecano.crud.repository.MecanicienRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,34 +21,25 @@ public class MecanicienService {
 
 
 
-//    public Mecanicien ajouterMecanicien(Mecanicien mecanicien){
-//     return
-//    }
-
-
-    private List<Mecanicien> aymenS= Arrays.asList(
-            new Mecanicien("aymen","4460 rue ontario","montreal","QC","H2A1V8",43822692,"AYMEN@GMAIL.COM","mecanicienDeFou","219 rue drapeau"),
-            new Mecanicien("aymen","4460 rue ontario","montreal","QC","H2A1V8",80000000,"AYMENnn@GMAIL.COM","mecanicienDeFou","219 rue drapeau")
-    );
-
-
-    //  );
-//
-   public List<Mecanicien> findAll() {
-       return aymenS;
-
+   public Mecanicien addMecanicien(Mecanicien mecanicien){
+     return mecanicienRepository.save(mecanicien);
    }
 
-//    public Mecanicien getID(String nom) {
-//        Mecanicien tofo=null;
-//        for(Mecanicien tofol:aymenS){
-//            if(tofol.getNom_Restaurant().equals(nom)){
-//                tofo=tofol;
-//                return tofo;
-//            }
-//        }
-//        return tofo;
-//    }
+   public List<Mecanicien> FindAllMecanicien(){
+     return mecanicienRepository.findAll();
+   }
+   public Mecanicien FindEmplyeById(Long id){
+     return mecanicienRepository.findMecanicienById(id).orElseThrow(()-> new com.alloMecano.crud.services.UserNotFoundException("user by id "+id+"was not found"));
+   }
+   public Mecanicien updateMecanicien(Mecanicien mecanicien){
+     return mecanicienRepository.save(mecanicien);
+   }
+    @Transactional
+   public void deleteMecanicien(Long id){
+     mecanicienRepository.deleteMecanicienById(id);
+   }
+
+
 
 
 

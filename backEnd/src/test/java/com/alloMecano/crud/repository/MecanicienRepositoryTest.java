@@ -1,12 +1,5 @@
-package com.alloMecano.crud.repository;
+package backEnd.src.test.java.com.alloMecano.crud.repository;
 
-import com.alloMecano.crud.controller.Mecanicien;
-import com.alloMecano.crud.repository.MecanicienRepository;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MecanicienRepositoryTest {
 
